@@ -8,7 +8,7 @@ class Report
   end
 
   def report(params)
-    response = connection.get('/services/v5/my/activity') do |req|
+    response = connection.get('/services/v5/projects/687551/activity') do |req|
       req.headers['X-TrackerToken'] = ENV['PIVOTAL_API_TOKEN']
       req.params = params
     end

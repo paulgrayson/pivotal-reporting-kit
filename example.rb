@@ -1,9 +1,5 @@
 require './boot'
 
-def report(params)
-  Report.new.report(params)
-end
+puts all.label(:flaky).event(:created).since(1.week.ago).run.json
 
-r = report(envelope: true, limit: 3)
-puts r.ok?
-puts r.json
+
