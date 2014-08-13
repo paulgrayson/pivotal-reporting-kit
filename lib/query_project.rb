@@ -4,7 +4,7 @@ class QueryProject
     @project_id = project_id
   end
 
-  # TODO maybe support no since_before specified => state is just 'accepted'
+  # TODO maybe support not specifying since_before => state is just 'accepted'
   def accepted(since_before)
     @accepted_after = since_before[:since] || since_before[:after]
     @accepted_before = since_before[:before]

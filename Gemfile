@@ -6,3 +6,7 @@ gem 'faraday'
 gem 'json'
 gem 'activesupport', require: false
 
+group :test do
+  gem 'rspec'
+end
+
