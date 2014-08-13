@@ -4,8 +4,9 @@ require 'active_support/core_ext/numeric/time.rb'
 require 'active_support/core_ext/date/calculations.rb'
 Dotenv.load
 
-require './lib/report'
-require './lib/report_response'
+require './lib/api_request'
+require './lib/api_response'
 require './lib/pivotal_query'
+require './lib/query_project'
 
 puts ENV['PIVOTAL_API_TOKEN']

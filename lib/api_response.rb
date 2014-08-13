@@ -1,4 +1,4 @@
-class ReportResponse
+class ApiResponse
   def initialize(raw_response)
     @raw_response = raw_response
     @json = nil

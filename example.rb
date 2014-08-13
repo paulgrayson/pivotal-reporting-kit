@@ -2,9 +2,9 @@ require './boot'
 
 project_id = 687551
 
-total = PivotalQuery.project(project_id).label(:flaky).count
-unstarted = PivotalQuery.project(project_id).label(:flaky).status(:unstarted).count
-accepted = PivotalQuery.project(project_id).label(:flaky).status(:accepted).count
+total = QueryProject.new(project_id).label(:flaky).count
+unstarted = QueryProject.new(project_id).label(:flaky).status(:unstarted).count
+accepted = QueryProject.new(project_id).label(:flaky).status(:accepted).count
 in_progress = total - accepted - unstarted
 
 puts "FLAKY REPORT"

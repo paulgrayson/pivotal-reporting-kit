@@ -1,4 +1,4 @@
-class Report
+class ApiRequest
 
   API_VERSION = 'v5'
   API_BASE_URI = 'https://www.pivotaltracker.com'
@@ -14,13 +14,13 @@ class Report
     end
   end
 
-  def report(project_id, params)
-    path = "/services/#{API_VERSION}/projects/#{project_id}/stories"
+  def request(query)
+    path = "/services/#{API_VERSION}/#{query.path}"
     response = connection.get(path) do |req|
       req.headers['X-TrackerToken'] = @api_token
-      req.params = params
+      req.params = query.params
     end
-    ReportResponse.new(response)
+    ApiResponse.new(response)
   end
 
 end
