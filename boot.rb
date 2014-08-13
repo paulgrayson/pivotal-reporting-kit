@@ -6,6 +6,6 @@ Dotenv.load
 
 require './lib/report'
 require './lib/report_response'
-require './lib/query'
+require './lib/pivotal_query'
 
 puts ENV['PIVOTAL_API_TOKEN']

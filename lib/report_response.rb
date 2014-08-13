@@ -15,6 +15,10 @@ class ReportResponse
   def json
     @json ||= JSON.parse(@raw_response.body)
   end
+
+  def item_count
+    json.length
+  end
 end
 
 
