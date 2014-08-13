@@ -8,5 +8,6 @@ require './lib/api_request'
 require './lib/api_response'
 require './lib/pivotal_query'
 require './lib/query_project'
+require './lib/query_account'
 
 puts ENV['PIVOTAL_API_TOKEN']

@@ -1,5 +1,9 @@
 require './boot'
 
+project_ids = QueryAccount.new.project_ids.join(', ')
+puts "--------------"
+puts project_ids
+
 project_id = 687551
 
 total = QueryProject.new(project_id).label(:flaky).count
