@@ -38,39 +38,57 @@ describe QueryProject do
       end
     end
 
-    context 'accepted' do
+    shared_examples 'filter for when state changed' do
+      #
+      # `state` should be defined e.g. accepted, created, updated
+      #
+      let(:state_after) { "#{state}_after".to_sym }
+      let(:state_before) { "#{state}_before".to_sym }
+
       context 'not specified' do
-        it 'does not add accepted_after' do
-          subject.params[:accepted_after].should be_nil
+        it 'does not add _after' do
+          subject.params[state_after].should be_nil
         end
 
-        it 'does not add accepted_before' do
-          subject.params[:accepted_before].should be_nil
+        it 'does not add _before' do
+          subject.params[state_before].should be_nil
         end
       end
       
       context 'specified' do
         let(:time) { Time.now }
         let(:time_in_ms) { double }
-        before do
-          allow(subject).to receive(:as_msec).with(time).and_return(time_in_ms)
+        before { allow(subject).to receive(:as_msec).with(time).and_return(time_in_ms) }
+
+        it 'adds _after' do
+          subject.send(state, since: time)
+          subject.params[state_after].should eq time_in_ms
         end
 
-
-
-        it 'adds accepted_after' do
-          subject.accepted(since: time)
-          subject.params[:accepted_after].should eq time_in_ms
-        end
-
-        it 'adds accepted_before' do
-          subject.accepted(before: time)
-          subject.params[:accepted_before].should eq time_in_ms
+        it 'adds _before' do
+          subject.send(state, before: time)
+          subject.params[state_before].should eq time_in_ms
         end
       end
     end
 
+    context 'accepted' do
+      let(:state) { 'accepted' }
+      it_behaves_like 'filter for when state changed'
+    end
+
+    context 'created' do
+      let(:state) { 'created' }
+      it_behaves_like 'filter for when state changed'
+    end
+
+    context 'updated' do
+      let(:state) { 'updated' }
+      it_behaves_like 'filter for when state changed'
+    end
+
   end
+
 
 end
 
