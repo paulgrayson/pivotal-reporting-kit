@@ -2,6 +2,14 @@ Pivotal Reporting Kit provides a nice API for extracting reporting data from the
 
 Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest/v5)
 
+## Status
+Still very much in development - see TODO below
+
+## Setup
+1. Copy `.env.example` as `.env`
+1. Get your PivotalTracker API token, go to your [pivotal profile page](https://www.pivotaltracker.com/profile), scroll down until you see `API token`
+1. Edit `.env` and set the value of `export PIVOTAL_API_TOKEN="YOUR API TOKEN HERE"` to your PivotalTracker API token.
+
 ## Examples
 
 ### Get all projects accessible by account
@@ -40,4 +48,6 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 ## TODO
 1. Allow combination of state changed filter with others by switching from e.g. `accepted_before` param and instead add a `accepted_before:<when>` clause to the `filter` param
 1. Implement aggregate queries across all projects e.g. `QueryAccount.new.all_projects.label('flaky').status(:unstarted).count`
+1. Make this a gem
+
 
