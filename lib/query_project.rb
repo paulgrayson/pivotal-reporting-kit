@@ -11,15 +11,15 @@ class QueryProject
 
   # TODO maybe support not specifying since_before => state is just 'accepted'
   def accepted(since_before)
-    state_when_filter(@accepted_filters, since_before)
+    when_state_changed_filter(@accepted_filters, since_before)
   end
 
   def created(since_before)
-    state_when_filter(@created_filters, since_before)
+    when_state_changed_filter(@created_filters, since_before)
   end
 
   def updated(since_before)
-    state_when_filter(@updated_filters, since_before)
+    when_state_changed_filter(@updated_filters, since_before)
   end
 
   # Valid values:
@@ -61,7 +61,7 @@ class QueryProject
 
   private
 
-  def state_when_filter(state_filters, since_before)
+  def when_state_changed_filter(state_filters, since_before)
     state_filters[:after] = since_before[:since] || since_before[:after]
     state_filters[:before] = since_before[:before]
     self
