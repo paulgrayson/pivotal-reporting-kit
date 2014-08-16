@@ -38,9 +38,9 @@ describe QueryProject do
       end
     end
 
-    shared_examples 'filter for when state changed' do
+    shared_examples 'filter for when state changed' do |state|
       #
-      # `state` should be defined e.g. accepted, created, updated
+      # `state` the name of the state change we're filtering for e.g. accepted, created, updated
       #
       let(:state_after) { "#{state}_after".to_sym }
       let(:state_before) { "#{state}_before".to_sym }
@@ -73,18 +73,15 @@ describe QueryProject do
     end
 
     context 'accepted' do
-      let(:state) { 'accepted' }
-      it_behaves_like 'filter for when state changed'
+      it_behaves_like 'filter for when state changed', 'accepted'
     end
 
     context 'created' do
-      let(:state) { 'created' }
-      it_behaves_like 'filter for when state changed'
+      it_behaves_like 'filter for when state changed', 'created'
     end
 
     context 'updated' do
-      let(:state) { 'updated' }
-      it_behaves_like 'filter for when state changed'
+      it_behaves_like 'filter for when state changed', 'updated'
     end
 
   end
