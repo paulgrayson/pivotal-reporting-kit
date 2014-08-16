@@ -1,7 +1,7 @@
 class ApiResponse
   def initialize(raw_response)
     @raw_response = raw_response
-    @json = nil
+    @data = nil
   end
 
   def ok?
@@ -12,12 +12,12 @@ class ApiResponse
     !ok?
   end
 
-  def json
-    @json ||= JSON.parse(@raw_response.body)
+  def data
+    @data ||= JSON.parse(@raw_response.body)
   end
 
   def item_count
-    json.length
+    data.length
   end
 end
 

@@ -1,7 +1,7 @@
 class QueryAccount
 
   def project_ids
-    run.json.collect {|project| project['id']}
+    run.data.collect {|project| project['id']}
   end
 
   def projects
