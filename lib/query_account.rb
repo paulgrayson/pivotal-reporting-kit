@@ -9,7 +9,7 @@ class QueryAccount
   end
 
   def run
-    ApiRequest.new(api_token).request(self)
+    api_request.request(self)
   end
 
   def count
@@ -25,6 +25,10 @@ class QueryAccount
   end
 
   private
+
+  def api_request
+    ApiRequest.new(api_token)
+  end
 
   def api_token
     # TODO be better make this dependency explicit and fetch token from env outside this class

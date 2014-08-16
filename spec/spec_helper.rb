@@ -75,4 +75,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
 end
