@@ -9,17 +9,28 @@ class QueryProject
     @labels = []
   end
 
-  # TODO maybe support not specifying since_before => state is just 'accepted'
-  def accepted(since_before)
-    when_state_changed_filter(@accepted_filters, since_before)
+  def accepted(since_before=nil)
+    if since_before
+      when_state_changed_filter(@accepted_filters, since_before)
+    else
+      status(:accepted)
+    end
   end
 
-  def created(since_before)
-    when_state_changed_filter(@created_filters, since_before)
+  def created(since_before=nil)
+    if since_before
+      when_state_changed_filter(@created_filters, since_before)
+    else
+      status(:created)
+    end
   end
 
-  def updated(since_before)
-    when_state_changed_filter(@updated_filters, since_before)
+  def updated(since_before=nil)
+    if since_before
+      when_state_changed_filter(@updated_filters, since_before)
+    else
+      status(:updated)
+    end
   end
 
   # Valid values:

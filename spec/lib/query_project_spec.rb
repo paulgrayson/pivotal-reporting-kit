@@ -70,6 +70,13 @@ describe QueryProject do
           subject.params[state_before].should eq time_in_ms
         end
       end
+
+      context 'no time specified' do
+        it 'adds state filter' do
+          subject.send(state)
+          subject.params[:filter].should eq "(state:#{state})"
+        end
+      end
     end
 
     context 'accepted' do
