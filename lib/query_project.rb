@@ -7,6 +7,7 @@ class QueryProject
     @updated_filters = {}
     @states = []
     @labels = []
+    @include_done = false
   end
 
   def accepted(since_before=nil)
@@ -31,6 +32,11 @@ class QueryProject
     else
       status(:updated)
     end
+  end
+
+  def include_done
+    @include_done = true
+    self
   end
 
   # Valid values:
@@ -81,12 +87,19 @@ class QueryProject
   def filter_param
     filters = @labels.map {|l| filter('label', l)}
     filters += mutually_exclusive_filters('state', @states) if @states.any?
-    filters.join('+')
+    filters << 'includedone:true' if @include_done
+    filters.join(' ')
   end
 
   def mutually_exclusive_filters(filter_key, filter_values)
     filters = filter_values.map {|s| filter(filter_key, s)}
-    ["(#{filters.join('+OR+')})"]
+    if filters.length > 1
+      ["(#{filters.join(' OR ')})"]
+    elsif filters.length == 1
+      ["#{filters[0]}"]
+    else
+      []
+    end
   end
 
   def filter(key, label)

@@ -1,14 +1,18 @@
 require './boot'
 
-project_ids = QueryAccount.new.project_ids.join(', ')
+project_ids = QueryAccount.new.project_ids
 puts "--------------"
-puts project_ids
+puts project_ids.join(', ')
 
-project_id = 687551
+total = 0
+unstarted = 0
+accepted = 0
 
-total = QueryProject.new(project_id).label(:flaky).count
-unstarted = QueryProject.new(project_id).label(:flaky).status(:unstarted).count
-accepted = QueryProject.new(project_id).label(:flaky).status(:accepted).count
+project_ids.each do |project_id|
+  total += QueryProject.new(project_id).label(:flaky).include_done.count
+  unstarted += QueryProject.new(project_id).label(:flaky).status(:unstarted).count
+  accepted += QueryProject.new(project_id).label(:flaky).include_done.status(:accepted).count
+end
 in_progress = total - accepted - unstarted
 
 puts "FLAKY REPORT"

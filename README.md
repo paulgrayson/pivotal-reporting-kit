@@ -22,10 +22,15 @@ Still very much in development - see TODO below
 	> QueryProject.new(268755).count
 	=> 52
 	
-### Count stories in project with the label 'needs merge'
+### Count stories in project with the label 'needs merge' in the current iteration
 
 	> QueryProject.new(268755).label('needs merge').count
 	=> 4
+	
+### Count stories in project with the label 'needs merge' and include those done in previous iterations
+
+	> QueryProject.new(268755).label('needs merge').include_done.count
+	=> 9
 	
 ### Count stories in project with the label 'flaky' that have not been started (unstarted)
 

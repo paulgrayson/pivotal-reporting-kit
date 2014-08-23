@@ -16,12 +16,12 @@ describe QueryProject do
 
       it 'adds filters for multiple single word labels' do
         subject.labels('apple', 'banana', 'pear')
-        subject.params[:filter].should eq 'label:apple+label:banana+label:pear'
+        subject.params[:filter].should eq 'label:apple label:banana label:pear'
       end
 
       it 'add filters for single word and quotes multi word labels' do
         subject.labels('apple fruit', 'banana', 'pear drop')
-        subject.params[:filter].should eq 'label:"apple fruit"+label:banana+label:"pear drop"'
+        subject.params[:filter].should eq 'label:"apple fruit" label:banana label:"pear drop"'
       end
 
     end
@@ -29,12 +29,12 @@ describe QueryProject do
     context 'states' do
       it 'adds a single state filter' do
         subject.status('unstarted')
-        subject.params[:filter].should eq '(state:unstarted)'
+        subject.params[:filter].should eq 'state:unstarted'
       end 
 
       it 'adds filters for multiple states' do
         subject.status('unstarted', 'unfinished')
-        subject.params[:filter].should eq '(state:unstarted+OR+state:unfinished)'
+        subject.params[:filter].should eq '(state:unstarted OR state:unfinished)'
       end
     end
 
@@ -74,7 +74,7 @@ describe QueryProject do
       context 'no time specified' do
         it 'adds state filter' do
           subject.send(state)
-          subject.params[:filter].should eq "(state:#{state})"
+          subject.params[:filter].should eq "state:#{state}"
         end
       end
     end
