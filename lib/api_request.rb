@@ -14,13 +14,12 @@ class ApiRequest
     end
   end
 
-  def request(query)
-    path = "/services/#{API_VERSION}/#{query.path}"
+  def request(path, params)
+    path = "/services/#{API_VERSION}/#{path}"
     response = connection.get(path) do |req|
       req.headers['X-TrackerToken'] = @api_token
-      req.params = query.params
+      req.params = params
     end
-    ApiResponse.new(response)
   end
 
 end

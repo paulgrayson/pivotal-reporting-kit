@@ -16,7 +16,7 @@ class ApiResponse
     @data ||= JSON.parse(@raw_response.body)
   end
 
-  def item_count
+  def count
     data.length
   end
 end

@@ -3,8 +3,7 @@ require './lib/query_project'
 
 describe QueryProject do
 
-  let(:project_id) { double }
-  subject { QueryProject.new(project_id) }
+  subject { QueryProject.new(double) }
 
   describe '#params' do
 

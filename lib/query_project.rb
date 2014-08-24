@@ -1,7 +1,7 @@
 class QueryProject
 
-  def initialize(project_id)
-    @project_id = project_id
+  def initialize(context)
+    @context = context
     @accepted_filters = {}
     @created_filters = {}
     @updated_filters = {}
@@ -52,18 +52,6 @@ class QueryProject
   end
   alias :labels :label
 
-  def run
-    ApiRequest.new(api_token).request(self)
-  end
-
-  def count
-    run.item_count
-  end
-
-  def path
-    "projects/#{@project_id}/stories"
-  end
-
   def params
     params = {}
     params[:filter] = filter_param
@@ -74,6 +62,14 @@ class QueryProject
     params[:updated_after] = as_msec(@updated_filters[:after]) if @updated_filters[:after]
     params[:updated_before] = as_msec(@updated_filters[:before]) if @updated_filters[:before]
     params
+  end
+
+  def path(project_id)
+    "projects/#{project_id}/stories"
+  end
+
+  def fetch
+    @context.run(self)
   end
 
   private
@@ -116,11 +112,6 @@ class QueryProject
 
   def as_msec(datetime)
     datetime.to_i * 1000
-  end
-
-  def api_token
-    # TODO be better make this dependency explicit and fetch token from env outside this class
-    ENV['PIVOTAL_API_TOKEN']
   end
 
 end
