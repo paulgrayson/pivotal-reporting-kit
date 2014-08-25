@@ -13,6 +13,7 @@ Still very much in development - see TODO below
 1. Allow combination of state changed filter with others by switching from e.g. `accepted_before` param and instead add a `accepted_before:<when>` clause to the `filter` param
 1. Make this a gem
 2. Support parallel api requests using typhoeus - configure vis PRKit.configure block
+3. Support pagination
 
 ## Setup
 1. Copy `.env.example` as `.env`
