@@ -51,9 +51,15 @@ Still very much in development - see TODO below
 
 
 ## TODO
+1. Namespace inside PRKit
+2. Configure api token through PRKit.configure block
 1. Replace Query#include_done with Query#current_iteration and make include_done default
-1. Throw an exception if when any api response is an errors
+1. Throw an exception if when any api response is an error
 1. Allow combination of state changed filter with others by switching from e.g. `accepted_before` param and instead add a `accepted_before:<when>` clause to the `filter` param
 1. Make this a gem
+2. Support parallel api requests using typhoeus
+
+
+
 
 

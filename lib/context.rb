@@ -5,6 +5,11 @@ class Context
   end
 
   private
+  
+  def api_request(path, params)
+    api ||= ApiRequest.new(api_token)
+    api.request(path, params)
+  end
 
   def api_token
     # TODO be better make this dependency explicit and fetch token from env outside this class

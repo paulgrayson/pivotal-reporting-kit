@@ -18,13 +18,9 @@ describe Query do
       proj_a = create_raw_response([id: 1])
       proj_b = create_raw_response([id: 2])
       proj_c = create_raw_response([id: 3])
+      ContextProject.any_instance.stub(:api_request).and_return(proj_a, proj_b, proj_c)
       account = create_raw_response([{id: 1}, {id: 2}, {id: 3}])
-      ApiRequest.stub(:new).and_return(
-        double(request: account),
-        double(request: proj_a),
-        double(request: proj_b),
-        double(request: proj_c)
-      )
+      ContextAccount.any_instance.stub(:api_request).and_return(account)
       stories = Query.all_projects.label(:flaky).status(:accepted).fetch
       stories.data.map {|s| s['id']}.should eq [1, 2, 3]
     end

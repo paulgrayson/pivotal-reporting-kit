@@ -6,7 +6,7 @@ class ContextProject < Context
 
   def run(query)
     responses = @project_ids.collect do |project_id|
-      response = ApiRequest.new(api_token).request(query.path(project_id), query.params)
+      response = api_request(query.path(project_id), query.params)
       ApiResponse.new(response)
     end
     CompositeApiResponse.new(responses)
