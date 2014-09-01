@@ -9,11 +9,12 @@ Still very much in development - see TODO below
 1. Namespace inside PRKit
 2. Configure api token through PRKit.configure block
 1. Replace Query#include_done with Query#current_iteration and make include_done default
-1. Throw an exception if when any api response is an error
+1. Throw an exception if when any API response is an error
 1. Allow combination of state changed filter with others by switching from e.g. `accepted_before` param and instead add a `accepted_before:<when>` clause to the `filter` param
-1. Make this a gem
-2. Support parallel api requests using typhoeus - configure vis PRKit.configure block
+1. Make this a Gem
+2. Support parallel API requests using typhoeus - configure this via PRKit.configure block
 3. Support pagination
+4. Provide methods on result object to filter results on the client side. Should provide same "interface" as on a query object
 
 ## Setup
 1. Copy `.env.example` as `.env`
