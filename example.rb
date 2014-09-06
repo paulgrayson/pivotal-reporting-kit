@@ -1,6 +1,7 @@
 require './boot'
+PRKit::configure(api_token: ENV['PIVOTAL_API_TOKEN'])
 
-all_flaky = Query.all_projects.label(:flaky).include_done.fetch
+all_flaky = PRKit::Query.all_projects.label(:flaky).include_done.fetch
 total = all_flaky.count
 
 unstarted = all_flaky.data.select {|story| story['current_state'] == 'unstarted'}.count
