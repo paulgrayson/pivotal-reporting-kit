@@ -5,10 +5,10 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 ## Status
 Still very much in development - see TODO below
 
-## TODO
+## TODO 
+1. Support accepted(on: date) updated(on: date) created(on: date)
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error
-1. Allow combination of state changed filter with others by switching from e.g. `accepted_before` param and instead add a `accepted_before:<when>` clause to the `filter` param
 1. Make this a Gem
 2. Support parallel API requests using typhoeus - configure this via PRKit.configure block
 3. Support pagination

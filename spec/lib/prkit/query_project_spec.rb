@@ -56,17 +56,17 @@ describe PRKit::QueryProject do
       
       context 'specified' do
         let(:time) { Time.now }
-        let(:time_in_ms) { double }
-        before { allow(subject).to receive(:as_msec).with(time).and_return(time_in_ms) }
+        let(:date) { double }
+        before { allow(subject).to receive(:as_date).with(time).and_return(date) }
 
         it 'adds _after' do
           subject.send(state, since: time)
-          subject.params[state_after].should eq time_in_ms
+          subject.params[:filter].should eq "#{state_after}:#{date}"
         end
 
         it 'adds _before' do
           subject.send(state, before: time)
-          subject.params[state_before].should eq time_in_ms
+          subject.params[:filter].should eq "#{state_before}:#{date}"
         end
       end
 

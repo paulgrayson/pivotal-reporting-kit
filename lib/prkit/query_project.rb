@@ -3,36 +3,22 @@ module PRKit
 
     def initialize(context)
       @context = context
-      @accepted_filters = {}
-      @created_filters = {}
-      @updated_filters = {}
       @states = []
       @labels = []
+      @when_state_changed_filters = []
       @include_done = false
     end
 
     def accepted(since_before=nil)
-      if since_before
-        when_state_changed_filter(@accepted_filters, since_before)
-      else
-        status(:accepted)
-      end
+      state_filter(:accepted, since_before)
     end
 
     def created(since_before=nil)
-      if since_before
-        when_state_changed_filter(@created_filters, since_before)
-      else
-        status(:created)
-      end
+      state_filter(:created, since_before)
     end
 
     def updated(since_before=nil)
-      if since_before
-        when_state_changed_filter(@updated_filters, since_before)
-      else
-        status(:updated)
-      end
+      state_filter(:updated, since_before)
     end
 
     def include_done
@@ -56,12 +42,6 @@ module PRKit
     def params
       params = {}
       params[:filter] = filter_param
-      params[:accepted_after] = as_msec(@accepted_filters[:after]) if @accepted_filters[:after]
-      params[:accepted_before] = as_msec(@accepted_filters[:before]) if @accepted_filters[:before]
-      params[:created_after] = as_msec(@created_filters[:after]) if @created_filters[:after]
-      params[:created_before] = as_msec(@created_filters[:before]) if @created_filters[:before]
-      params[:updated_after] = as_msec(@updated_filters[:after]) if @updated_filters[:after]
-      params[:updated_before] = as_msec(@updated_filters[:before]) if @updated_filters[:before]
       params
     end
 
@@ -75,19 +55,30 @@ module PRKit
 
     private
 
-    def when_state_changed_filter(state_filters, since_before)
-      state_filters[:after] = since_before[:since] || since_before[:after]
-      state_filters[:before] = since_before[:before]
-      self
+    def state_filter(state, since_before=nil)
+      if since_before
+        after = since_before[:after] || since_before[:since]
+        before = since_before[:before]
+        if after
+          @when_state_changed_filters << "#{state}_after:#{as_date(after)}"
+        elsif before
+          @when_state_changed_filters << "#{state}_before:#{as_date(before)}"
+        end
+        self
+      else
+        status(state)
+      end
     end
 
     def filter_param
       filters = @labels.map {|l| filter('label', l)}
+      filters += @when_state_changed_filters if @when_state_changed_filters.any?
       filters += mutually_exclusive_filters('state', @states) if @states.any?
       filters << 'includedone:true' if @include_done
       filters.join(' ')
     end
 
+    # TODO rename to or_mutually_exclusive_filters ?
     def mutually_exclusive_filters(filter_key, filter_values)
       filters = filter_values.map {|s| filter(filter_key, s)}
       if filters.length > 1
@@ -111,8 +102,8 @@ module PRKit
       end
     end
 
-    def as_msec(datetime)
-      datetime.to_i * 1000
+    def as_date(datetime)
+      datetime.strftime("%m/%d/%Y")
     end
 
   end
