@@ -1,10 +1,10 @@
 require 'spec_helper'
-require './lib/query_account'
+require './lib/prkit'
 
-describe QueryAccount do
+describe PRKit::QueryAccount do
 
   let(:context) { double }
-  subject { QueryAccount.new(context) }
+  subject { PRKit::QueryAccount.new(context) }
 
   describe '#projects' do
     it 'calls back the runner' do

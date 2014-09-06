@@ -1,9 +1,9 @@
 require 'spec_helper'
-require './lib/query_project'
+require './lib/prkit'
 
-describe QueryProject do
+describe PRKit::QueryProject do
 
-  subject { QueryProject.new(double) }
+  subject { PRKit::QueryProject.new(double) }
 
   describe '#params' do
 

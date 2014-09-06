@@ -6,7 +6,6 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 Still very much in development - see TODO below
 
 ## TODO
-1. Namespace inside PRKit
 2. Configure api token through PRKit.configure block
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error

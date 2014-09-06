@@ -1,4 +1,4 @@
-class CompositeApiResponse
+class PRKit::CompositeApiResponse
   def initialize(api_responses)
     @api_responses = api_responses
   end
