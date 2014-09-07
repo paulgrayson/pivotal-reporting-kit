@@ -1,4 +1,4 @@
-require_relative 'prkit/api_request'
+require_relative 'prkit/api'
 require_relative 'prkit/api_response'
 require_relative 'prkit/composite_api_response'
 require_relative 'prkit/query'
@@ -11,10 +11,11 @@ require_relative 'prkit/query_account'
 module PRKit
   extend self
 
-  attr_accessor :api_token
+  attr_reader :api_token, :concurrent
 
   def configure(opts={})
-    @api_token = opts[:api_token]
+    @api_token = opts.fetch(:api_token)
+    @concurrent = opts.fetch(:concurrent, false)
   end
 
 end

@@ -2,7 +2,8 @@ module PRKit
   class ContextAccount < Context
 
     def run(query)
-      response = api_request(query.path, query.params)
+      api = Api.new
+      response = api.request(query.path, query.params)
       ApiResponse.new(response)
     end
 

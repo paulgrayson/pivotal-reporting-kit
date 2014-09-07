@@ -6,11 +6,15 @@ module PRKit
     end
 
     def run(query)
-      responses = @project_ids.collect do |project_id|
-        response = api_request(query.path(project_id), query.params)
-        ApiResponse.new(response)
+      responses = []
+      api = Api.new
+      api.transaction do
+        @project_ids.collect do |project_id|
+          responses << api.request(query.path(project_id), query.params)
+        end
       end
-      CompositeApiResponse.new(responses)
+      api_responses = responses.map {|r| ApiResponse.new(r)}
+      CompositeApiResponse.new(api_responses)
     end
 
   end

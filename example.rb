@@ -1,5 +1,5 @@
 require './boot'
-PRKit::configure(api_token: ENV['PIVOTAL_API_TOKEN'])
+PRKit::configure(api_token: ENV['PIVOTAL_API_TOKEN'], concurrent: true)
 
 all_flaky = PRKit::Query.all_projects.label(:flaky).include_done.fetch
 total = all_flaky.count

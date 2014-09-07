@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem 'dotenv'
 gem 'faraday'
+gem 'typhoeus'
 gem 'json'
 gem 'activesupport', require: false
 

@@ -9,8 +9,7 @@ Still very much in development - see TODO below
 1. Support accepted(on: date) updated(on: date) created(on: date)
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error
-1. Make this a Gem
-2. Support parallel API requests using typhoeus - configure this via PRKit.configure block
+1. Make this a Gem (make sure Typhoeus is optional)
 3. Support pagination
 4. Provide methods on result object to filter results on the client side. Should provide same "interface" as on a query object
 
