@@ -13,12 +13,23 @@ Still very much in development - see TODO below
 3. Support pagination
 4. Provide methods on result object to filter results on the client side. Should provide same "interface" as on a query object
 
-## Setup
+## Setup to run example.rb and example2.rb
 1. Copy `.env.example` as `.env`
 1. Get your PivotalTracker API token, go to your [pivotal profile page](https://www.pivotaltracker.com/profile), scroll down until you see `API token`
 1. Edit `.env` and set the value of `export PIVOTAL_API_TOKEN="YOUR API TOKEN HERE"` to your PivotalTracker API token.
 
 ## Examples
+
+### Simple setup - just the API token
+
+  > PRKit::configure(api_token: '<pivotal api token>')
+
+### Concurrent API requests using typhoeus
+
+This will count stories with label 'needs merge' across all projects in the account.
+`concurrent: true` causes it to use Typhoeus to make requests to all projects concurrently
+  > PRKit::configure(api_token: '<pivotal api token>', concurrent: true)
+  > PRKit::Query.all_projects.label('needs merge').count
 
 ### Get all projects accessible by account
 
