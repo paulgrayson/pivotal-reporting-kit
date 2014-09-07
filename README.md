@@ -22,7 +22,7 @@ Still very much in development - see TODO below
 
 ### Simple setup - just the API token
 
-  > PRKit::configure(api_token: 'pivotal api token')
+	> PRKit::configure(api_token: 'pivotal api token')
 
 ### Concurrent API requests using typhoeus
 
@@ -30,8 +30,8 @@ This will count stories with label 'needs merge' across all projects in the acco
 
 Use Typhoeus to make requests to all projects concurrently by configuring with `concurrent: true`.
 
-  > PRKit::configure(api_token: '<pivotal api token>', concurrent: true)
-  > PRKit::Query.all_projects.label('needs merge').count
+	> PRKit::configure(api_token: '<pivotal api token>', concurrent: true)
+	> PRKit::Query.all_projects.label('needs merge').count
 
 ### Get all projects accessible by account
 
