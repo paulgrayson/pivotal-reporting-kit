@@ -6,7 +6,6 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 Still very much in development - see TODO below
 
 ## TODO 
-1. Chain stories filters - make Stories filter methods return a filtered stories object rather than an array
 1. Support accepted(on: date) updated(on: date) created(on: date)
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error

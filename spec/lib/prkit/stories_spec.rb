@@ -49,15 +49,15 @@ describe PRKit::Stories do
     end
 
     it 'only returns stories with that one word label' do
-      subject.label('label1').should eq (stories_with_label1 + stories_with_both_labels)
+      subject.label('label1').all.should eq (stories_with_label1 + stories_with_both_labels)
     end
 
     it 'only returns stories with that multi-word label' do
-      subject.label('multi word label').should eq (stories_with_multi_word_label + stories_with_both_labels)
+      subject.label('multi word label').all.should eq (stories_with_multi_word_label + stories_with_both_labels)
     end
 
     it 'only returns stories with both labels' do
-      subject.label('label1', 'multi word label').should eq (stories_with_both_labels)
+      subject.label('label1', 'multi word label').all.should eq (stories_with_both_labels)
     end 
   end
 
@@ -68,11 +68,11 @@ describe PRKit::Stories do
     let(:stories) { unstarted_stories + accepted_stories + started_stories }
 
     it 'only returns stories with that status' do
-      subject.status('unstarted').should eq (unstarted_stories)
+      subject.status('unstarted').all.should eq (unstarted_stories)
     end
 
     it 'only returns stories with that status or the other status' do
-      subject.status('unstarted', 'accepted').should eq (unstarted_stories + accepted_stories)
+      subject.status('unstarted', 'accepted').all.should eq (unstarted_stories + accepted_stories)
     end
   end
 
@@ -88,19 +88,19 @@ describe PRKit::Stories do
     let(:stories) { accepted_stories + started_stories }
 
     it 'only returns stories whose current state is accepted' do
-      subject.accepted.should eq accepted_stories
+      subject.accepted.all.should eq accepted_stories
     end
 
     it 'returns stories accepted before the specified time' do
-      subject.accepted(before: point_in_time).should eq stories_accepted_before
+      subject.accepted(before: point_in_time).all.should eq stories_accepted_before
     end
 
     it 'returns stories accepted after the specified time' do
-      subject.accepted(after: point_in_time).should eq stories_accepted_after
+      subject.accepted(after: point_in_time).all.should eq stories_accepted_after
     end
 
     it 'returns stories accepted since the specified time' do
-      subject.accepted(since: point_in_time).should eq stories_accepted_after
+      subject.accepted(since: point_in_time).all.should eq stories_accepted_after
     end
   end
 
@@ -110,15 +110,15 @@ describe PRKit::Stories do
     let(:stories) { stories_created_before + stories_created_after }
 
     it 'only returns stories created before the specified time' do
-      subject.created(before: point_in_time).should eq stories_created_before
+      subject.created(before: point_in_time).all.should eq stories_created_before
     end
 
     it 'only returns stories created after the specified time' do
-      subject.created(after: point_in_time).should eq stories_created_after
+      subject.created(after: point_in_time).all.should eq stories_created_after
     end
 
     it 'only returns stories created since the specified time' do
-      subject.created(since: point_in_time).should eq stories_created_after
+      subject.created(since: point_in_time).all.should eq stories_created_after
     end
   end
 
@@ -128,15 +128,15 @@ describe PRKit::Stories do
     let(:stories) { stories_updated_before + stories_updated_after }
 
     it 'only returns stories updated before the specified time' do
-      subject.updated(before: point_in_time).should eq stories_updated_before
+      subject.updated(before: point_in_time).all.should eq stories_updated_before
     end
 
     it 'only returns stories updated after the specified time' do
-      subject.updated(after: point_in_time).should eq stories_updated_after
+      subject.updated(after: point_in_time).all.should eq stories_updated_after
     end
 
     it 'only returns stories updated since the specified time' do
-      subject.updated(since: point_in_time).should eq stories_updated_after
+      subject.updated(since: point_in_time).all.should eq stories_updated_after
     end
   end
 
