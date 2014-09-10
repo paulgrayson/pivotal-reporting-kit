@@ -4,11 +4,11 @@ PRKit::configure(api_token: ENV['PIVOTAL_API_TOKEN'], concurrent: true)
 all_flaky = PRKit::Query.all_projects.label(:flaky).include_done.fetch
 total = all_flaky.count
 
-unstarted = all_flaky.data.select {|story| story['current_state'] == 'unstarted'}.count
-# TODO unstarted = all_flaky.status(:unstarted).count
+#unstarted = all_flaky.data.select {|story| story['current_state'] == 'unstarted'}.count
+unstarted = all_flaky.stories.status(:unstarted).count
 
-accepted = all_flaky.data.select {|story| story['current_state'] == 'accepted'}.count
-# TODO accepted = all_flaky.status(:accepted).count
+#accepted = all_flaky.data.select {|story| story['current_state'] == 'accepted'}.count
+accepted = all_flaky.stories.status(:accepted).count
 
 # As separated queries..
 #unstarted = Query.all_projects.label(:flaky).status(:unstarted).fetch.item_count

@@ -1,5 +1,5 @@
 module PRKit
-  class QueryProject
+  class QueryProject < StoryFilter
 
     def initialize(context)
       @context = context

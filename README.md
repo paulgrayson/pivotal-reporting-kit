@@ -6,12 +6,13 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 Still very much in development - see TODO below
 
 ## TODO 
+1. Chain stories filters - make Stories filter methods return a filtered stories object rather than an array
 1. Support accepted(on: date) updated(on: date) created(on: date)
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error
 1. Make this a Gem (make sure Typhoeus is optional)
 3. Support pagination
-4. Provide methods on result object to filter results on the client side. Should provide same "interface" as on a query object
+1. DRY up ApiResponse and CompositeApiResponse
 
 ## Setup to run example.rb and example2.rb
 1. Copy `.env.example` as `.env`
@@ -28,7 +29,7 @@ Still very much in development - see TODO below
 
 This will count stories with label 'needs merge' across all projects in the account.
 
-Use Typhoeus to make requests to all projects concurrently by configuring with `concurrent: true`.
+Optionally, use Typhoeus to make requests to all projects concurrently by configuring with `concurrent: true`. (You'll need to add typhoeus to your gems)
 
 	> PRKit::configure(api_token: '<pivotal api token>', concurrent: true)
 	> PRKit::Query.all_projects.label('needs merge').count
@@ -74,4 +75,12 @@ Use Typhoeus to make requests to all projects concurrently by configuring with `
 	`labels` is an alias for `label`.
 	`label` accepts multiple labels.
 	> QueryProject.new(268755).accepted(before: 2.days.ago).labels('flaky', 'needs merge')
+
+### Filter results already fetched from the server using the same interface as queries
+
+  > all_labelled_mobile = Query.project(23432).label('mobile').fetch
+  > accepted_count = all_labelled_mobile.accepted.count
+  > started_count = all_labelled_mobile.status(:started).count
+  > also_labelled_responsive = all_labelled_mobile.label('responsive')
+  > mobile_and_responsive_count = also_labelled_responsive.count
 

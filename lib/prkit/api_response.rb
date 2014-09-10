@@ -17,6 +17,10 @@ module PRKit
       @data ||= JSON.parse(@raw_response.body)
     end
 
+    def stories
+      @stories ||= Stories.new(data)
+    end
+
     def count
       data.length
     end
