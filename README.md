@@ -6,11 +6,14 @@ Uses [PivotalTracker's v5 beta API](https://www.pivotaltracker.com/help/api/rest
 Still very much in development - see TODO below
 
 ## TODO 
+1. Make this a Gem (make sure Typhoeus is optional)
+1. Error with message when api token is blank
+1. Support querying project memberships
+1. Support accepted/created/updated between dates
+3. Support pagination
 1. Support accepted(on: date) updated(on: date) created(on: date)
 1. Replace Query#include_done with Query#current_iteration and make include_done default
 1. Throw an exception if when any API response is an error
-1. Make this a Gem (make sure Typhoeus is optional)
-3. Support pagination
 1. DRY up ApiResponse and CompositeApiResponse
 
 ## Setup to run example.rb and example2.rb

@@ -14,9 +14,10 @@ module PRKit
     end
 
     def data
-      @data ||= JSON.parse(@raw_response.body)
+      @data ||= ::JSON.parse(@raw_response.body)
     end
 
+    # TODO this can be called for non-project responses, where the data is not an array of stories
     def stories
       @stories ||= Stories.new(data)
     end
