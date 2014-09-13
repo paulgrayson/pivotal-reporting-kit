@@ -9,16 +9,8 @@ require_relative 'prkit/story_filter'
 require_relative 'prkit/stories'
 require_relative 'prkit/query_project'
 require_relative 'prkit/query_account'
+require_relative 'prkit/config'
 
 module PRKit
-  extend self
-
-  attr_reader :api_token, :concurrent
-
-  def configure(opts={})
-    @api_token = opts.fetch(:api_token)
-    @concurrent = opts.fetch(:concurrent, false)
-  end
-
 end
 

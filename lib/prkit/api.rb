@@ -13,9 +13,10 @@ module PRKit
     end
 
     def request(path, params)
+      PRKit::Config.ensure_configured!
       full_path = "/services/#{API_VERSION}/#{path}"
       response = connection.get(full_path) do |req|
-        req.headers['X-TrackerToken'] = PRKit::api_token
+        req.headers['X-TrackerToken'] = PRKit::Config.api_token
         req.params = params
       end
       response
@@ -30,7 +31,7 @@ module PRKit
     private
 
     def config
-      @config ||= if PRKit::concurrent
+      @config ||= if PRKit::Config.concurrent
         Concurrent.new
       else
         Sequential.new

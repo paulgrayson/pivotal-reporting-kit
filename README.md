@@ -7,7 +7,6 @@ Still very much in development - see TODO below
 
 ## TODO 
 1. Make this a Gem (make sure Typhoeus is optional)
-1. Error with message when api token is blank
 1. Support querying project memberships
 1. Support accepted/created/updated between dates
 3. Support pagination
