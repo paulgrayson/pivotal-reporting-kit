@@ -1,13 +1,8 @@
-# A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'dotenv'
-gem 'faraday'
-gem 'typhoeus'
-gem 'json'
-gem 'activesupport', require: false
+#gem 'typhoeus'
+#gem 'activesupport', require: false
 
-group :test do
-  gem 'rspec'
-end
+# Specify your gem's dependencies in prkit.gemspec
+gemspec
 

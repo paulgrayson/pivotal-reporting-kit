@@ -10,6 +10,7 @@ require_relative 'prkit/stories'
 require_relative 'prkit/query_project'
 require_relative 'prkit/query_account'
 require_relative 'prkit/config'
+require_relative 'prkit/version'
 
 module PRKit
 end
