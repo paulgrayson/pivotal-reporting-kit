@@ -76,6 +76,16 @@ describe PRKit::QueryProject do
           subject.params[:filter].should eq "state:#{state}"
         end
       end
+
+      context 'date range specified' do
+        it do
+          from = '2014-10-31'
+          to = '2014-11-22'
+          filter_range = "10/31/2014..11/22/2014"
+          subject.send(state, [Date.parse(from), Date.parse(to)])
+          subject.params[:filter].should eq "#{state}:#{filter_range}"
+        end
+      end
     end
 
     context 'accepted' do

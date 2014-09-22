@@ -55,18 +55,36 @@ module PRKit
 
     private
 
-    def state_filter(state, since_before=nil)
-      if since_before
-        after = since_before[:after] || since_before[:since]
-        before = since_before[:before]
-        if after
-          @when_state_changed_filters << "#{state}_after:#{as_date(after)}"
-        elsif before
-          @when_state_changed_filters << "#{state}_before:#{as_date(before)}"
-        end
+    def state_filter(state, since_before_range=nil)
+      since_before, range = if since_before_range.is_a?(Array)
+        [nil, since_before_range]
+      else
+        [since_before_range, nil]
+      end
+      if range
+        @when_state_changed_filters << range_filter(state, range)
+        self
+      elsif since_before
+        @when_state_changed_filters << since_before_filter(state, since_before)
         self
       else
         status(state)
+      end
+    end
+
+    def range_filter(state, range)
+      from = range[0]
+      to = range[1]
+      "#{state}:#{as_date(from)}..#{as_date(to)}"
+    end
+
+    def since_before_filter(state, since_before)
+      after = since_before[:after] || since_before[:since]
+      before = since_before[:before]
+      if after
+        "#{state}_after:#{as_date(after)}"
+      elsif before
+        "#{state}_before:#{as_date(before)}"
       end
     end
 
